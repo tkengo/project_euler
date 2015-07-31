@@ -26,9 +26,9 @@ def geometric_series(d)
 end
 
 def multiple_efficiently
-  n1 = geometric_series 3
-  n2 = geometric_series 5
-  n3 = geometric_series 15
+  n1 = geometric_series M1
+  n2 = geometric_series M2
+  n3 = geometric_series M1 * M2
 
   n1 + n2 - n3
 end
