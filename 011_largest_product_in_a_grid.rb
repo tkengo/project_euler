@@ -1,9 +1,8 @@
 ADJACENT_DIGITS = 4
-LEFT  = 0
-UP    = 1
-RIGHT = 2
-DOWN  = 3
-DIAG  = 4
+RIGHT = 0
+DOWN  = 1
+DIAG1 = 2
+DIAG2 = 3
 
 GRID = [
   [  8,02,22,97,38,15,00,40,00,75,04,05,07,78,52,12,50,77,91, 8 ],
@@ -32,19 +31,18 @@ def largest_product(n)
   max = 0
   GRID.length.times do |r|
     GRID.length.times do |c|
-      result = [ 1, 1, 1, 1, 1 ]
-      n.times do |i|
-        c1 = c >= n - 1
-        c2 = r >= n - 1
-        c3 = c <= GRID.length - n
-        c4 = r <= GRID.length - n
+      result = [ 1, 1, 1, 1 ]
+      c1 = c >= n - 1
+      c2 = c <= GRID.length - n
+      c3 = r <= GRID.length - n
 
-        result[LEFT]  *= GRID[r    ][c - i] if c1
-        result[UP]    *= GRID[r - i][c    ] if c2
-        result[RIGHT] *= GRID[r    ][c + i] if c3
-        result[DOWN]  *= GRID[r + i][c    ] if c4
-        result[DIAG]  *= GRID[r + i][c + i] if c1 && c2 && c3 && c4
+      n.times do |i|
+        result[RIGHT] *= GRID[r    ][c + i] if c2
+        result[DOWN]  *= GRID[r + i][c    ] if c3
+        result[DIAG1] *= GRID[r + i][c - i] if c1 && c3
+        result[DIAG2] *= GRID[r + i][c + i] if c2 && c3
       end
+
       max = (result + [ max ]).max
     end
   end
